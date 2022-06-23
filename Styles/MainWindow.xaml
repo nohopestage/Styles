@@ -1,0 +1,105 @@
+﻿<Window
+    x:Class="Styles.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:controls="clr-namespace:Styles.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="MW"
+    Title="MainWindow"
+    Width="800"
+    Height="400"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ObjectDataProvider
+            x:Key="Dock"
+            MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="Dock" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider
+            x:Key="HorizontalAlignment"
+            MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="HorizontalAlignment" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider
+            x:Key="VerticalAlignment"
+            MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="VerticalAlignment" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <DataTemplate x:Key="DemoContentTemplate">
+            <Grid Background="#202020">
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock
+                            FontSize="16"
+                            Foreground="White"
+                            Text="TabStripPlacement" />
+                        <ComboBox
+                            Margin="0,10"
+                            ItemsSource="{Binding Source={StaticResource Dock}}"
+                            SelectedValue="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type controls:DynamicTabControl}}}" />
+                    </StackPanel>
+                    <StackPanel Margin="10,0">
+                        <StackPanel>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="TabsHorizontalAlignment" />
+                            <ComboBox
+                                Margin="0,10"
+                                ItemsSource="{Binding Source={StaticResource HorizontalAlignment}}"
+                                SelectedValue="{Binding TabsHorizontalAlignment, RelativeSource={RelativeSource AncestorType={x:Type controls:DynamicTabControl}}}" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="TabsVerticalAlignment" />
+                            <ComboBox
+                                Margin="0,10"
+                                ItemsSource="{Binding Source={StaticResource VerticalAlignment}}"
+                                SelectedValue="{Binding TabsVerticalAlignment, RelativeSource={RelativeSource AncestorType={x:Type controls:DynamicTabControl}}}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="16"
+                            Foreground="White"
+                            Text="HorizontalContentAlignment" />
+                        <ComboBox
+                            Margin="0,10"
+                            ItemsSource="{Binding Source={StaticResource HorizontalAlignment}}"
+                            SelectedValue="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type controls:DynamicTabControl}}}" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <controls:DynamicTabControl ContentTemplate="{StaticResource DemoContentTemplate}" TabsHorizontalAlignment="Center">
+            <TabItem Header="Header" />
+            <TabItem Header="Large Header" />
+            <TabItem Header="Extra Large Header" />
+        </controls:DynamicTabControl>
+    </Grid>
+
+</Window>
