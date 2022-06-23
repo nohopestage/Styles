@@ -108,7 +108,6 @@ namespace Styles.Controls
         private async void OnTabStripPlacementPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // Wait for the layout to change to ensure correct calculations
-
             await Task.Delay(100);
 
             switch (e.NewValue)
